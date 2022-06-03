@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:news_demo/splashScreen.dart';
-import 'modules/Tabbar/TabBarController.dart';
-import 'modules/Tabbar/TabbarScreen.dart';
-import 'modules/Tabbar/savedNewsScreen.dart';
-import 'modules/authetication/controller/authenticationController.dart';
-import 'modules/authetication/loginScreen.dart';
-import 'modules/homepage/HomePageController.dart';
-import 'modules/homepage/homePage.dart';
+import 'package:news_demo/splash_screen.dart';
+import 'modules/Tabbar/tab_bar_controller.dart';
+import 'modules/Tabbar/tabbar_screen.dart';
+import 'modules/Tabbar/saved_news_screen.dart';
+import 'modules/authetication/controller/authentication_controller.dart';
+import 'modules/authetication/login_screen.dart';
+import 'modules/homepage/home_page_controller.dart';
+import 'modules/homepage/home_page.dart';
 
 void main() async {
   await GetStorage.init();
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         getPages: [
           GetPage(
             name: SplashScreen.routeName,
-            page: () => const SplashScreen(),
+            page: () => SplashScreen(),
             transition: Transition.rightToLeft,
           ),
           GetPage(

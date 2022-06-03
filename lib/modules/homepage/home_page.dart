@@ -3,13 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:news_demo/Utils/size_utils.dart';
 import '../../theme/app_color.dart';
-import 'HomePageController.dart';
+import 'home_page_controller.dart';
 
-class HomePageScreen extends StatelessWidget {
+class HomePageScreen extends StatefulWidget {
   static const routeName = '/homePage_screen';
 
-  HomePageScreen({Key? key}) : super(key: key);
+  const HomePageScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomePageScreen> createState() => _HomePageScreenState();
+}
+
+class _HomePageScreenState extends State<HomePageScreen> {
   final HomePageController _homePageController = Get.find();
 
   @override
@@ -75,21 +80,48 @@ class HomePageScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.network(
-                                  _homePageController.newsDataModel.value.articles?[i].urlToImage ?? "",
-                                  fit: BoxFit.cover,
-                                  height: SizeUtils.verticalBlockSize * 20,
-                                  width: double.infinity,
-                                  loadingBuilder: (context, child, loadingProgress) {
-                                    if (loadingProgress == null) return child;
-                                    return Container(
-                                        height: SizeUtils.verticalBlockSize * 20,
-                                        color: Colors.grey[300],
-                                        child: const Center(child: CircularProgressIndicator()));
-                                  },
-                                  errorBuilder: (context, error, stackTrace) => const Center(
-                                    child: Text(" No Image!!!"),
-                                  ),
+                                Stack(
+                                  children: [
+                                    Image.network(
+                                      _homePageController.newsDataModel.value.articles?[i].urlToImage ?? "",
+                                      fit: BoxFit.cover,
+                                      height: SizeUtils.verticalBlockSize * 20,
+                                      width: double.infinity,
+                                      loadingBuilder: (context, child, loadingProgress) {
+                                        if (loadingProgress == null) return child;
+                                        return Container(
+                                            height: SizeUtils.verticalBlockSize * 20,
+                                            color: Colors.grey[300],
+                                            child: const Center(child: CircularProgressIndicator()));
+                                      },
+                                      errorBuilder: (context, error, stackTrace) => const Center(
+                                        child: Text(" No Image!!!"),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      right: 0,
+                                      top: 0,
+                                      child: IconButton(
+                                        onPressed: () async {
+                                          if (_homePageController.newsDataModel.value.articles?[i].isLike == true) {
+                                            _homePageController.saveNewsDataModel.value.articles!.removeAt(i);
+                                            _homePageController.saveNewsDataModel.refresh();
+                                            await _homePageController.unLikeAndSave(_homePageController.saveNewsDataModel.value.articles!);
+                                            _homePageController.newsDataModel.value.articles?[i].isLike = false;
+                                          } else {
+                                            await _homePageController.setLike(_homePageController.newsDataModel.value.articles![i]);
+                                            _homePageController.newsDataModel.value.articles?[i].isLike = true;
+                                          }
+                                          _homePageController.newsDataModel.refresh();
+                                        },
+                                        icon: Icon(
+                                          Icons.favorite,
+                                          color:
+                                              (_homePageController.newsDataModel.value.articles?[i].isLike ?? false) ? Colors.red : Colors.grey[300],
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 SizedBox(
                                   height: SizeUtils.verticalBlockSize * 1,

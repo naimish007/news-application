@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../theme/app_color.dart';
-import '../authetication/controller/authenticationController.dart';
-import 'TabBarController.dart';
+import '../authetication/controller/authentication_controller.dart';
+import 'tab_bar_controller.dart';
 
 class TabBarScreen extends StatelessWidget {
   static const routeName = '/tab_bar_screen';

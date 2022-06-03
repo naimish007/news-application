@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:news_demo/modules/Tabbar/savedNewsScreen.dart';
+import 'package:news_demo/modules/Tabbar/saved_news_screen.dart';
 
-import '../homepage/homePage.dart';
+import '../homepage/home_page.dart';
 
 class TabBarController extends GetxController {
   RxInt selectItem = 0.obs;
   final page = [
-    HomePageScreen(),
+    const HomePageScreen(),
     const SavedNewsScreen(),
   ];
 }

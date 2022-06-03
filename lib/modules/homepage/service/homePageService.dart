@@ -1,5 +1,5 @@
 import '../../../helpers/network_helper.dart';
-import '../../../models/NewsDataModel.dart';
+import '../../../models/news_data_model.dart';
 
 class HomePageService {
   static final NetworkAPICall _networkAPICall = NetworkAPICall();
