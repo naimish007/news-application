@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Utils/size_utils.dart';
 import '../../theme/app_color.dart';
 import '../authentication/controller/authentication_controller.dart';
 import 'controller/tab_bar_controller.dart';
@@ -34,10 +35,10 @@ class TabBarScreen extends StatelessWidget {
           elevation: 10,
           showUnselectedLabels: true,
           selectedItemColor: Colors.green,
-          unselectedLabelStyle: const TextStyle(
+          unselectedLabelStyle: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w500,
-            fontSize: 10,
+            fontSize: SizeUtils.fSize_12(),
           ),
           backgroundColor: Colors.white,
           unselectedItemColor: Colors.black,
@@ -45,10 +46,10 @@ class TabBarScreen extends StatelessWidget {
           onTap: (value) async {
             tabBarScreenController.selectItem.value = value;
           },
-          selectedLabelStyle: const TextStyle(
+          selectedLabelStyle: TextStyle(
             color: Colors.green,
             fontWeight: FontWeight.w600,
-            fontSize: 10,
+            fontSize: SizeUtils.fSize_12(),
           ),
           items: [
             _tabBarItem(
