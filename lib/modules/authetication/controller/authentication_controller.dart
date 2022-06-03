@@ -30,7 +30,7 @@ class AuthenticationController extends GetxController {
     await handleGetContact(_googleSignIn.currentUser!);
     userid.value = _googleSignIn.currentUser?.id ?? '';
     if (_googleSignIn.currentUser?.id.isNotEmpty ?? false) {
-      userName.value = AppSharedPreference.userName.toString();
+      userName.value = _googleSignIn.currentUser?.displayName.toString() ?? "";
       AppSharedPreference.setUserName(userName.value);
       Get.offAllNamed(TabBarScreen.routeName);
     }
@@ -38,7 +38,7 @@ class AuthenticationController extends GetxController {
 
   Future<void> checkLogin() async {
     userName.value = AppSharedPreference.userName.toString();
-    if (AppSharedPreference.userName == null || AppSharedPreference.userName != '') {
+    if (AppSharedPreference.userName != null && AppSharedPreference.userName != '') {
       Get.offAllNamed(TabBarScreen.routeName);
     } else {
       Get.offAllNamed(LoginScreen.routeName);
@@ -49,6 +49,7 @@ class AuthenticationController extends GetxController {
     try {
       isLoading.value = true;
       await _googleSignIn.signOut();
+      AppSharedPreference.clear();
       Get.offAndToNamed(LoginScreen.routeName);
 
       return;
