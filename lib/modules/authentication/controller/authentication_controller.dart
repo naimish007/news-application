@@ -24,6 +24,7 @@ class AuthenticationController extends GetxController {
   }
 
   Future<void> signInWithGoogle() async {
+    var result = await _googleSignIn.signIn();
     await handleGetContact(_googleSignIn.currentUser!);
     userid.value = _googleSignIn.currentUser?.id ?? '';
     if (_googleSignIn.currentUser?.id.isNotEmpty ?? false) {
