@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_demo/theme/app_color.dart';
 import 'Utils/size_utils.dart';
-import 'modules/authetication/controller/authentication_controller.dart';
-import 'modules/authetication/login_screen.dart';
+import 'modules/authentication/controller/authentication_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splash_screen';

@@ -5,13 +5,13 @@ import 'package:get/get.dart';
 import 'package:news_demo/helpers/shared_preference.dart';
 import 'package:news_demo/modules/homepage/service/homePageService.dart';
 
-import '../../models/news_data_model.dart';
+import '../../../models/news_data_model.dart';
 
 class HomePageController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isLoadingSecond = false.obs;
 
-  Rx<Articles> articleData =Articles().obs;
+  Rx<Articles> articleData = Articles().obs;
   Rx<NewsDataModel> newsDataModel = NewsDataModel().obs;
   Rx<NewsDataModel> saveNewsDataModel = NewsDataModel().obs;
 
@@ -27,8 +27,7 @@ class HomePageController extends GetxController {
       isLoading.value = true;
       newsDataModel.value = await HomePageService.getNewsData(searchText);
       for (var element in saveNewsDataModel.value.articles!) {
-        int index = newsDataModel.value.articles!
-            .indexWhere((elementInner) => elementInner.url == element.url);
+        int index = newsDataModel.value.articles!.indexWhere((elementInner) => elementInner.url == element.url);
         if (index != -1) {
           newsDataModel.value.articles![index].isLike = true;
         }
@@ -51,10 +50,8 @@ class HomePageController extends GetxController {
         newsListPagination.add(newsDataModel.value);
       }
 
-      print("newsListPagination==>>>${newsListPagination.length}");
       for (var element in saveNewsDataModel.value.articles!) {
-        int index = newsDataModel.value.articles!
-            .indexWhere((elementInner) => elementInner.url == element.url);
+        int index = newsDataModel.value.articles!.indexWhere((elementInner) => elementInner.url == element.url);
         if (index != -1) {
           newsDataModel.value.articles![index].isLike = true;
         }

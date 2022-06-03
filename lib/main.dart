@@ -1,17 +1,15 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:news_demo/splash_screen.dart';
-import 'modules/Tabbar/tab_bar_controller.dart';
+import 'modules/Tabbar/controller/tab_bar_controller.dart';
 import 'modules/Tabbar/tabbar_screen.dart';
-import 'modules/Tabbar/saved_news_screen.dart';
-import 'modules/authetication/controller/authentication_controller.dart';
-import 'modules/authetication/login_screen.dart';
-import 'modules/homepage/home_page_controller.dart';
-import 'modules/homepage/home_page.dart';
-import 'modules/homepage/news_detail_screen.dart';
+import 'modules/authentication/controller/authentication_controller.dart';
+import 'modules/authentication/screen/login_screen.dart';
+import 'modules/homepage/screen/saved_news_screen.dart';
+import 'modules/homepage/controller/home_page_controller.dart';
+import 'modules/homepage/screen/home_page.dart';
+import 'modules/homepage/screen/news_detail_screen.dart';
 
 void main() async {
   await GetStorage.init();
@@ -53,12 +51,12 @@ class MyApp extends StatelessWidget {
           ),
           GetPage(
             name: HomePageScreen.routeName,
-            page: () => HomePageScreen(),
+            page: () => const HomePageScreen(),
             transition: Transition.rightToLeft,
           ),
           GetPage(
             name: SavedNewsScreen.routeName,
-            page: () => SavedNewsScreen(),
+            page: () => const SavedNewsScreen(),
             transition: Transition.rightToLeft,
           ),
           GetPage(

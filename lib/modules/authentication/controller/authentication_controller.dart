@@ -5,8 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:news_demo/helpers/shared_preference.dart';
 
 import '../../Tabbar/tabbar_screen.dart';
-import '../../homepage/home_page.dart';
-import '../login_screen.dart';
+import '../screen/login_screen.dart';
 
 class AuthenticationController extends GetxController {
   String? token = "";
@@ -22,11 +21,9 @@ class AuthenticationController extends GetxController {
 
   Future<void> handleGetContact(GoogleSignInAccount user) async {
     token = (await user.authentication).idToken;
-    print("token :- $token");
   }
 
   Future<void> signInWithGoogle() async {
-    var result = await _googleSignIn.signIn();
     await handleGetContact(_googleSignIn.currentUser!);
     userid.value = _googleSignIn.currentUser?.id ?? '';
     if (_googleSignIn.currentUser?.id.isNotEmpty ?? false) {
@@ -53,7 +50,8 @@ class AuthenticationController extends GetxController {
       Get.offAndToNamed(LoginScreen.routeName);
 
       return;
-    } catch (e, st) {
+    } catch (e) {
+      log("error==$e");
     } finally {
       isLoading.value = false;
     }

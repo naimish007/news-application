@@ -15,12 +15,12 @@ class NetworkAPICall {
 
   NetworkAPICall._internal();
 
-  static const String BASE_URL = AppConfig.baseURL;
+  static const String baseUrl = AppConfig.baseURL;
 
   Future<dynamic> get(String url) async {
     final client = http.Client();
     try {
-      final String fullURL = BASE_URL + url;
+      final String fullURL = baseUrl + url;
       log('API Url: $fullURL');
       final response = await client.get(Uri.parse(fullURL));
       log('Response status: ${response.statusCode}');

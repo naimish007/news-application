@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:news_demo/Utils/size_utils.dart';
 import 'package:news_demo/theme/app_color.dart';
 
-import 'home_page_controller.dart';
+import '../controller/home_page_controller.dart';
 
 class DetailedNewsScreen extends StatelessWidget {
   static const routeName = '/detailed_news_screen';
@@ -37,11 +37,7 @@ class DetailedNewsScreen extends StatelessWidget {
                     height: SizeUtils.verticalBlockSize * 30,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                          image: NetworkImage(_homePageController
-                                  .articleData.value.urlToImage ??
-                              ""),
-                          fit: BoxFit.cover),
+                      image: DecorationImage(image: NetworkImage(_homePageController.articleData.value.urlToImage ?? ""), fit: BoxFit.cover),
                     ),
                   ),
                   SizedBox(
@@ -53,8 +49,7 @@ class DetailedNewsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          _homePageController.articleData.value.description ??
-                              "",
+                          _homePageController.articleData.value.description ?? "",
                           style: TextStyle(
                             fontSize: SizeUtils.fSize_15(),
                             color: AppColor.blackColor.withOpacity(0.5),

@@ -17,7 +17,7 @@ class NewsDataModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['totalResults'] = totalResults;
     if (articles != null) {
@@ -52,17 +52,17 @@ class Articles {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (source != null) {
       data['source'] = source!.toJson();
     }
     data['author'] = author;
     data['title'] = title;
-    data['description'] = this.description;
-    data['url'] = this.url;
-    data['urlToImage'] = this.urlToImage;
-    data['publishedAt'] = this.publishedAt;
-    data['content'] = this.content;
+    data['description'] = description;
+    data['url'] = url;
+    data['urlToImage'] = urlToImage;
+    data['publishedAt'] = publishedAt;
+    data['content'] = content;
     data['isLike'] = isLike;
     return data;
   }
@@ -80,9 +80,9 @@ class Source {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
     return data;
   }
 }

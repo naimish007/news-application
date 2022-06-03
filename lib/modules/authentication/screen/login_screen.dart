@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_demo/Utils/size_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../theme/app_color.dart';
+
 import 'package:get/get.dart';
-import 'controller/authentication_controller.dart';
+
+import '../../../theme/app_color.dart';
+import '../controller/authentication_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login_screen';

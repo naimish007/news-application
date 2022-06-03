@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_demo/Utils/size_utils.dart';
-import 'package:news_demo/modules/homepage/home_page_controller.dart';
-
-import '../../theme/app_color.dart';
+import 'package:news_demo/modules/homepage/controller/home_page_controller.dart';
 
 class SavedNewsScreen extends StatefulWidget {
   static const routeName = '/saved_News_screen';
