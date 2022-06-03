@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -9,6 +11,7 @@ import 'modules/authetication/controller/authentication_controller.dart';
 import 'modules/authetication/login_screen.dart';
 import 'modules/homepage/home_page_controller.dart';
 import 'modules/homepage/home_page.dart';
+import 'modules/homepage/news_detail_screen.dart';
 
 void main() async {
   await GetStorage.init();
@@ -61,6 +64,11 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: TabBarScreen.routeName,
             page: () => TabBarScreen(),
+            transition: Transition.rightToLeft,
+          ),
+          GetPage(
+            name: DetailedNewsScreen.routeName,
+            page: () => DetailedNewsScreen(),
             transition: Transition.rightToLeft,
           ),
         ]);

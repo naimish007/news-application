@@ -6,7 +6,8 @@ class HomePageService {
 
   static Future<NewsDataModel> getNewsData(String searchText) async {
     try {
-      final result = await _networkAPICall.get("everything?q=$searchText&apiKey=a33cdb0605c44914944fc4bfdea2f25f");
+      final result = await _networkAPICall.get(
+          "everything?q=$searchText&apiKey=a33cdb0605c44914944fc4bfdea2f25f");
       return NewsDataModel.fromJson(result);
     } catch (e) {
       rethrow;
@@ -15,7 +16,8 @@ class HomePageService {
 
   static Future<NewsDataModel> getAllNewsData() async {
     try {
-      final result = await _networkAPICall.get("top-headlines?country=In&apiKey=a33cdb0605c44914944fc4bfdea2f25f");
+      final result = await _networkAPICall.get(
+          "top-headlines?country=In&apiKey=b5dde94297ec4049ad4a4069421d268e");
       return NewsDataModel.fromJson(result);
     } catch (e) {
       rethrow;
