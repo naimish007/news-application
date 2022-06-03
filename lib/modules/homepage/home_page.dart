@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:news_demo/Utils/size_utils.dart';
+import 'package:news_demo/modules/homepage/news_detail_screen.dart';
+
 import '../../theme/app_color.dart';
 import 'home_page_controller.dart';
 
@@ -41,7 +43,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 textAlignVertical: TextAlignVertical.center,
                 onChanged: (String value) {
                   if (_homePageController.searchController.text.isNotEmpty) {
-                    _homePageController.getNewsData(_homePageController.searchController.text);
+                    _homePageController
+                        .getNewsData(_homePageController.searchController.text);
 
                     _homePageController.newsDataModel.refresh();
                   } else {
@@ -74,77 +77,150 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       primary: true,
                       shrinkWrap: true,
                       itemBuilder: (context, i) {
-                        return Card(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: SizeUtils.horizontalBlockSize * 2, vertical: SizeUtils.verticalBlockSize * 1),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Stack(
-                                  children: [
-                                    Image.network(
-                                      _homePageController.newsDataModel.value.articles?[i].urlToImage ?? "",
-                                      fit: BoxFit.cover,
-                                      height: SizeUtils.verticalBlockSize * 20,
-                                      width: double.infinity,
-                                      loadingBuilder: (context, child, loadingProgress) {
-                                        if (loadingProgress == null) return child;
-                                        return Container(
-                                            height: SizeUtils.verticalBlockSize * 20,
-                                            color: Colors.grey[300],
-                                            child: const Center(child: CircularProgressIndicator()));
-                                      },
-                                      errorBuilder: (context, error, stackTrace) => const Center(
-                                        child: Text(" No Image!!!"),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      right: 0,
-                                      top: 0,
-                                      child: IconButton(
-                                        onPressed: () async {
-                                          if (_homePageController.newsDataModel.value.articles?[i].isLike == true) {
-                                            _homePageController.saveNewsDataModel.value.articles!.removeAt(i);
-                                            _homePageController.saveNewsDataModel.refresh();
-                                            await _homePageController.unLikeAndSave(_homePageController.saveNewsDataModel.value.articles!);
-                                            _homePageController.newsDataModel.value.articles?[i].isLike = false;
-                                          } else {
-                                            await _homePageController.setLike(_homePageController.newsDataModel.value.articles![i]);
-                                            _homePageController.newsDataModel.value.articles?[i].isLike = true;
-                                          }
-                                          _homePageController.newsDataModel.refresh();
+                        return GestureDetector(
+                          onTap: () {
+                            _homePageController.articleData.value =
+                                _homePageController
+                                    .newsDataModel.value.articles![i];
+                            Get.toNamed(
+                              DetailedNewsScreen.routeName,
+                            );
+                          },
+                          child: Card(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: SizeUtils.horizontalBlockSize * 2,
+                                  vertical: SizeUtils.verticalBlockSize * 1),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Image.network(
+                                        _homePageController.newsDataModel.value
+                                                .articles?[i].urlToImage ??
+                                            "",
+                                        fit: BoxFit.cover,
+                                        height:
+                                            SizeUtils.verticalBlockSize * 20,
+                                        width: double.infinity,
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress == null)
+                                            return child;
+                                          return Container(
+                                              height:
+                                                  SizeUtils.verticalBlockSize *
+                                                      20,
+                                              color: Colors.grey[300],
+                                              child: const Center(
+                                                  child:
+                                                      CircularProgressIndicator()));
                                         },
-                                        icon: Icon(
-                                          Icons.favorite,
-                                          color:
-                                              (_homePageController.newsDataModel.value.articles?[i].isLike ?? false) ? Colors.red : Colors.grey[300],
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                Center(
+                                          child: Container(
+                                              height:
+                                                  SizeUtils.verticalBlockSize *
+                                                      20,
+                                              width: double.infinity,
+                                              color: Colors.grey[300],
+                                              child: Center(
+                                                  child: Text(" No Image!!!"))),
                                         ),
                                       ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: SizeUtils.verticalBlockSize * 1,
-                                ),
-                                Text(
-                                  _homePageController.newsDataModel.value.articles?[i].title ?? "",
-                                  style: const TextStyle(fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(
-                                  height: SizeUtils.verticalBlockSize * 1.5,
-                                ),
-                                Text(
-                                  _homePageController.newsDataModel.value.articles?[i].content ?? "",
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(fontWeight: FontWeight.w400),
-                                )
-                              ],
+                                      Positioned(
+                                        right: 0,
+                                        top: 0,
+                                        child: IconButton(
+                                          onPressed: () async {
+                                            if (_homePageController
+                                                    .newsDataModel
+                                                    .value
+                                                    .articles?[i]
+                                                    .isLike ==
+                                                true) {
+                                              _homePageController
+                                                  .saveNewsDataModel
+                                                  .value
+                                                  .articles!
+                                                  .removeAt(i);
+                                              _homePageController
+                                                  .saveNewsDataModel
+                                                  .refresh();
+                                              await _homePageController
+                                                  .unLikeAndSave(
+                                                      _homePageController
+                                                          .saveNewsDataModel
+                                                          .value
+                                                          .articles!);
+                                              _homePageController
+                                                  .newsDataModel
+                                                  .value
+                                                  .articles?[i]
+                                                  .isLike = false;
+                                            } else {
+                                              await _homePageController.setLike(
+                                                  _homePageController
+                                                      .newsDataModel
+                                                      .value
+                                                      .articles![i]);
+                                              _homePageController
+                                                  .newsDataModel
+                                                  .value
+                                                  .articles?[i]
+                                                  .isLike = true;
+                                            }
+                                            _homePageController.newsDataModel
+                                                .refresh();
+                                          },
+                                          icon: Icon(
+                                            Icons.favorite,
+                                            color: (_homePageController
+                                                        .newsDataModel
+                                                        .value
+                                                        .articles?[i]
+                                                        .isLike ??
+                                                    false)
+                                                ? Colors.red
+                                                : Colors.grey[300],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: SizeUtils.verticalBlockSize * 1,
+                                  ),
+                                  Text(
+                                    _homePageController.newsDataModel.value
+                                            .articles?[i].title ??
+                                        "",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: SizeUtils.verticalBlockSize * 1.5,
+                                  ),
+                                  Text(
+                                    _homePageController.newsDataModel.value
+                                            .articles?[i].content ??
+                                        "",
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w400),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         );
                       },
-                      itemCount: _homePageController.newsDataModel.value.articles?.length ?? 0,
+                      itemCount: _homePageController
+                              .newsDataModel.value.articles?.length ??
+                          0,
                     ),
                   ),
           ),
